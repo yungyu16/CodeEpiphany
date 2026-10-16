@@ -10,6 +10,8 @@
     <idea-version since-build="233.3"/>
 
     <depends>com.intellij.modules.platform</depends>
+    <!-- Fork modification: declare the JCEF dependency for IDEA 2026.2 class loading. -->
+    <depends>com.intellij.modules.jcef</depends>
 
     <resource-bundle>messages.PluginBundle</resource-bundle>
     <actions>

@@ -1,10 +1,10 @@
 package com.wenjunhuang.codeepiphany.model
 
-import com.intellij.testFramework.fixtures.BasePlatformTestCase
+import junit.framework.TestCase
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.*
 
-class MatchRegionTest extends BasePlatformTestCase {
+class MatchRegionTest extends TestCase {
   def testLanguageRegionMatch(): Unit = {
     val java = Language.Java
     assertThat(

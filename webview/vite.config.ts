@@ -13,7 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 export const definedViteConfig = defineConfig({
     build: {
         target: 'ES2022',
-        outDir: "../target/webviewResources/webview",
+        outDir: "../build/webviewResources/webview",
         chunkSizeWarningLimit: 1000, // 提高警告阈值到1MB
         rollupOptions: {
             input: {

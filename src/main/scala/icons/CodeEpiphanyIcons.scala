@@ -13,9 +13,6 @@ object CodeEpiphanyIcons {
   val PLUGIN: Icon = IconLoader.getIcon("/icons/pluginIcon.svg", CodeEpiphanyIcons.getClass.getClassLoader)
 
   @static
-  val DOWNLOAD: Icon = IconLoader.getIcon("/icons/download.svg", CodeEpiphanyIcons.getClass.getClassLoader)
-
-  @static
   val LOGIN: Icon =
     IconLoader.getIcon("/icons/login.svg", CodeEpiphanyIcons.getClass.getClassLoader)
   @static
@@ -58,9 +55,6 @@ object CodeEpiphanyIcons {
 
   @static
   val APP_BRACKETS: Icon = IconLoader.getIcon("/icons/app-brackets.svg", CodeEpiphanyIcons.getClass.getClassLoader)
-
-  @static
-  val CC: Icon = IconLoader.getIcon("/icons/cc.png", CodeEpiphanyIcons.getClass.getClassLoader)
 
   @static
   val HEART: Icon = IconLoader.getIcon("/icons/heart.svg", CodeEpiphanyIcons.getClass.getClassLoader)

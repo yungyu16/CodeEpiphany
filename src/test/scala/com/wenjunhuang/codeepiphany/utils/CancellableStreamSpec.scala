@@ -9,6 +9,7 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.duration.*
 
+@org.junit.runner.RunWith(classOf[org.scalatestplus.junit.JUnitRunner])
 class CancellableStreamSpec extends AsyncFreeSpec with AsyncIOSpec with Matchers {
 
   "CancellableStream" - {

@@ -2,143 +2,55 @@ package com.wenjunhuang.codeepiphany.model
 
 import cats.Show
 import cats.syntax.all.*
-
 import com.wenjunhuang.codeepiphany.PluginBundle
-import com.wenjunhuang.codeepiphany.atcoder.models.AtCoderDifficulty
 import org.typelevel.ci.CIString
+
 import java.net.HttpCookie
 import javax.swing.Icon
-import org.jsoup.Jsoup
 import scala.annotation.static
 
 enum CodeDojo(val domain: CIString, val value: String) {
-  case HackerRank extends CodeDojo(CIString("hackerrank.com"), "hackerrank")
-  case LeetCode   extends CodeDojo(CIString("leetcode.com"), "leetcode")
+  case LeetCode extends CodeDojo(CIString("leetcode.com"), "leetcode")
   case LeetCodeCN extends CodeDojo(CIString("leetcode.cn"), "leetcodecn")
-  case CodeForces extends CodeDojo(CIString("codeforces.com"), "codeforces")
-  case AtCoder    extends CodeDojo(CIString("atcoder.jp"), "atcoder")
-  case LuoGu      extends CodeDojo(CIString("luogu.com.cn"), "luogu")
 
   def getIcon: Option[Icon] = this match {
-    case HackerRank => Some(icons.CodeEpiphanyIcons.Dojos.HACKERRANK)
-    case LeetCode   => Some(icons.CodeEpiphanyIcons.Dojos.LEETCODE)
+    case LeetCode => Some(icons.CodeEpiphanyIcons.Dojos.LEETCODE)
     case LeetCodeCN => Some(icons.CodeEpiphanyIcons.Dojos.LEETCODECN)
-    case CodeForces => Some(icons.CodeEpiphanyIcons.Dojos.CODEFORCES)
-    case AtCoder    => Some(icons.CodeEpiphanyIcons.Dojos.ATCODER)
-    case LuoGu      => Some(icons.CodeEpiphanyIcons.Dojos.LUOGU)
   }
 
   def getIconPath: Option[String] = this match {
-    case HackerRank => Some(icons.CodeEpiphanyIcons.Dojos.HACKERRANK_PATH)
-    case LeetCode   => Some(icons.CodeEpiphanyIcons.Dojos.LEETCODE_PATH)
+    case LeetCode => Some(icons.CodeEpiphanyIcons.Dojos.LEETCODE_PATH)
     case LeetCodeCN => Some(icons.CodeEpiphanyIcons.Dojos.LEETCODECN_PATH)
-    case CodeForces => Some(icons.CodeEpiphanyIcons.Dojos.CODEFORCES_PATH)
-    case AtCoder    => Some(icons.CodeEpiphanyIcons.Dojos.ATCODER_PATH)
-    case LuoGu      => Some(icons.CodeEpiphanyIcons.Dojos.LUOGU_PATH)
   }
 
-  def getLoginURL: String = this match {
-    case HackerRank => "https://www.hackerrank.com/auth/login"
-    case LeetCode   => "https://leetcode.com/accounts/login/"
-    case LeetCodeCN => "https://leetcode.cn/accounts/login/"
-    case CodeForces => "https://codeforces.com/enter"
-    case AtCoder    => "https://atcoder.jp/login"
-    case LuoGu      => "https://www.luogu.com.cn/auth/login"
-  }
+  def getLoginURL: String = s"https://${domain}/accounts/login/"
 
-  def loginCandidateCookies(cookies: List[HttpCookie], content: String): Boolean = this match {
-    case HackerRank => cookies.exists(_.getName == "remember_hacker_token")
-    case LeetCode   => cookies.exists(cookie => cookie.getName == "LEETCODE_SESSION" && cookie.getValue.nonEmpty)
-    case LeetCodeCN => cookies.exists(cookie => cookie.getName == "LEETCODE_SESSION" && cookie.getValue.nonEmpty)
-    case CodeForces =>
-      if (cookies.exists(cookie => cookie.getName == "X-User" && cookie.getValue.nonEmpty)) true
-      else {
-        try {
-          val document = Jsoup.parse(content)
-          document.select("a[href^=/profile]").first() match {
-            case null => false
-            case profile =>
-              val userName = profile.text()
-              userName.nonEmpty && profile.attr("href") == s"/profile/$userName"
-          }
-        } catch {
-          case _: Throwable => false
-        }
-      }
-    case AtCoder =>
-      cookies.exists(cookie =>
-        cookie.getName == "REVEL_SESSION" && cookie.getValue.nonEmpty && cookie.getValue.contains("SessionKey")
-      )
-    case LuoGu =>
-      cookies.exists(cookie =>
-        cookie.getName == "_uid" && cookie.getValue.nonEmpty && (cookie.getValue != "0") && content.contains("欢迎回来")
-      )
-  }
+  def loginCandidateCookies(cookies: List[HttpCookie], content: String): Boolean =
+    cookies.exists(cookie => cookie.getName == "LEETCODE_SESSION" && cookie.getValue.nonEmpty)
 
-  def requiresCodeRegionEnclosure: Boolean = {
-    this match {
-      case HackerRank => true
-      case LeetCode   => true
-      case LeetCodeCN => true
-      case CodeForces => true
-      case AtCoder    => true
-      case LuoGu      => true
-    }
-  }
+  def requiresCodeRegionEnclosure: Boolean = true
 
-  def difficultyShow(difficulty: String): String = {
-    this match {
-      case HackerRank => difficulty
-      case LeetCode   => difficulty
-      case LeetCodeCN => difficulty
-      case CodeForces => difficulty
-      case AtCoder    => difficulty
-      case LuoGu      => difficulty
-    }
-  }
+  def difficultyShow(difficulty: String): String = difficulty
 
-  def difficultyShowAsHtml(difficulty: String): String = {
-    this match {
-      case AtCoder => AtCoderDifficulty.showAsHtmlFromStorage(difficulty)
-      case _       => ""
-    }
-  }
+  def difficultyShowAsHtml(difficulty: String): String = ""
 }
 
 object CodeDojo {
   implicit val codeDojoShow: Show[CodeDojo] = Show.show {
-    case HackerRank => "HackerRank"
-    case LeetCode   => "LeetCode"
+    case LeetCode => "LeetCode"
     case LeetCodeCN => PluginBundle.message("leetcodecn.settings.displayName")
-    case CodeForces => "CodeForces"
-    case AtCoder    => "AtCoder"
-    case LuoGu      => PluginBundle.message("luogu.settings.displayName")
   }
 
   @static
   def show(dojo: CodeDojo): String = dojo.show
 
-  def fromCIHostname(s: CIString): Option[CodeDojo] = s match {
-    case _ if s.contains(HackerRank.domain) => Some(CodeDojo.HackerRank)
-    case _ if s.contains(LeetCode.domain)   => Some(CodeDojo.LeetCode)
-    case _ if s.contains(LeetCodeCN.domain) => Some(CodeDojo.LeetCodeCN)
-    case _ if s.contains(CodeForces.domain) => Some(CodeDojo.CodeForces)
-    case _ if s.contains(AtCoder.domain)    => Some(CodeDojo.AtCoder)
-    case _ if s.contains(LuoGu.domain)      => Some(CodeDojo.LuoGu)
-    case _                                  => None
-  }
+  def fromCIHostname(host: CIString): Option[CodeDojo] =
+    CodeDojo.values.find(dojo => host == dojo.domain || host.toString.toLowerCase.endsWith("." + dojo.domain))
 
   def fromCIShow(value: CIString): Option[CodeDojo] =
-    if value == CIString(show(HackerRank)) then Some(HackerRank)
-    else if value == CIString(show(LeetCode)) then Some(LeetCode)
-    else if value == CIString(show(LeetCodeCN)) then Some(LeetCodeCN)
-    else if value == CIString(show(CodeForces)) then Some(CodeForces)
-    else if value == CIString(show(AtCoder)) then Some(AtCoder)
-    else if value == CIString(show(LuoGu)) then Some(LuoGu)
-    else None
+    CodeDojo.values.find(dojo => value == CIString(show(dojo)))
 
-  private val ALL_DOJOS = CodeDojo.values.map { dojo => CIString(dojo.value) -> dojo }.toMap
+  private val ALL_DOJOS = CodeDojo.values.map(dojo => CIString(dojo.value) -> dojo).toMap
 
-  def fromCIString(s: CIString): Option[CodeDojo] =
-    ALL_DOJOS.get(s)
+  def fromCIString(value: CIString): Option[CodeDojo] = ALL_DOJOS.get(value)
 }

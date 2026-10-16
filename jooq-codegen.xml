@@ -9,7 +9,7 @@
 
         <database>
             <name>org.jooq.meta.sqlite.SQLiteDatabase</name>
-            <includes>.*</includes>
+            <includes>challenge|challenge_language|solution|solution_submission|leetcode_challenge|leetcode_submission</includes>
             <excludes>.*?_(config|data|docsize|idx)</excludes>
             <outputSchemaToDefault>true</outputSchemaToDefault>
             <includeSystemTables>false</includeSystemTables>
@@ -22,16 +22,6 @@
                     <name>BIGINT</name>
                     <includeExpression>.*Id</includeExpression>
                     <includeExpression>id</includeExpression>
-                    <types>INTEGER</types>
-                </forcedType>
-                <forcedType>
-                    <name>BIGINT</name>
-                    <includeExpression>atcoder_contests*.startEpochSecond</includeExpression>
-                    <types>INTEGER</types>
-                </forcedType>
-                <forcedType>
-                    <name>BIGINT</name>
-                    <includeExpression>atcoder_contests*.durationSecond</includeExpression>
                     <types>INTEGER</types>
                 </forcedType>
             </forcedTypes>

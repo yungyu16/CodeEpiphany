@@ -4,10 +4,6 @@ LeetCode Epiphany
 
 - **[LeetCode](https://www.leetcode.com)**
 - **[LeetCode Chinese](https://www.leetcode.cn)**
-- **[LuoGu](https://www.luogu.com.cn/)**
-- **[AtCoder](https://atcoder.jp)**
-- **[CodeForces](https://codeforces.com/)**
-- **[HackerRank](https://www.hackerrank.com)**
  
 **Now available on Android!** 📱 Download our mobile app from [Google Play](https://play.google.com/store/apps/details?id=com.wenjunhuang.codeepiphanyapp) to practice coding challenges on the go.
 
@@ -45,10 +41,6 @@ LeetCode Epiphany
 
 - **[LeetCode](https://www.leetcode.com)**
 - **[力扣中国](https://www.leetcode.cn)**
-- **[洛谷](https://www.luogu.com.cn/)**
-- **[AtCoder](https://atcoder.jp)**
-- **[CodeForces](https://codeforces.com/)**
-- **[HackerRank](https://www.hackerrank.com)**
 
 **现已推出安卓版本！** 📱 从 [Google Play](https://play.google.com/store/apps/details?id=com.wenjunhuang.codeepiphanyapp) 下载我们的移动应用，随时随地刷题练习。
 

@@ -7,16 +7,8 @@ import com.intellij.openapi.wm.impl.content.ToolWindowContentUi
 import com.intellij.openapi.wm.{ToolWindow, ToolWindowContentUiType, ToolWindowManager}
 import com.intellij.ui.content.{Content, ContentManager, ContentManagerEvent, ContentManagerListener}
 import com.wenjunhuang.codeepiphany.PluginBundle
-import com.wenjunhuang.codeepiphany.atcoder.settings.AtCoderSettings
-import com.wenjunhuang.codeepiphany.atcoder.ui.AtCoderChallengesView
-import com.wenjunhuang.codeepiphany.codeforces.settings.CodeForcesSettings
-import com.wenjunhuang.codeepiphany.codeforces.ui.CodeForcesChallengesView
-import com.wenjunhuang.codeepiphany.hackerrank.settings.HackerRankSettings
-import com.wenjunhuang.codeepiphany.hackerrank.ui.HackerRankChallengesView
 import com.wenjunhuang.codeepiphany.leetcode.settings.{LeetCodeCNSettings, LeetCodeSettings}
 import com.wenjunhuang.codeepiphany.leetcode.ui.LeetCodeChallengesView
-import com.wenjunhuang.codeepiphany.luogu.settings.LuoGuSettings
-import com.wenjunhuang.codeepiphany.luogu.ui.LuoGuChallengesView
 import com.wenjunhuang.codeepiphany.model.Actions.TITLE_TOOLBAR_GROUP
 import com.wenjunhuang.codeepiphany.model.{Actions, CodeDojo}
 import com.wenjunhuang.codeepiphany.services.BaseChallengesView
@@ -105,20 +97,6 @@ object CodeDojoToolWindowFactory {
     updateCodeDojoContent(
       project,
       contentManager,
-      CodeDojo.AtCoder,
-      classOf[AtCoderSettings],
-      AtCoderChallengesView(project)
-    )
-    updateCodeDojoContent(
-      project,
-      contentManager,
-      CodeDojo.CodeForces,
-      classOf[CodeForcesSettings],
-      CodeForcesChallengesView(project)
-    )
-    updateCodeDojoContent(
-      project,
-      contentManager,
       CodeDojo.LeetCodeCN,
       classOf[LeetCodeCNSettings],
       LeetCodeChallengesView(project, CodeDojo.LeetCodeCN)
@@ -130,14 +108,6 @@ object CodeDojoToolWindowFactory {
       classOf[LeetCodeSettings],
       LeetCodeChallengesView(project, CodeDojo.LeetCode)
     )
-    updateCodeDojoContent(
-      project,
-      contentManager,
-      CodeDojo.HackerRank,
-      classOf[HackerRankSettings],
-      HackerRankChallengesView(project)
-    )
-    updateCodeDojoContent(project, contentManager, CodeDojo.LuoGu, classOf[LuoGuSettings], LuoGuChallengesView(project))
 
     if contentManager.getContentCount == 0 then
       val setupRequiredPromptView = SetupRequiredPromptView(project)

@@ -9,11 +9,7 @@ import com.wenjunhuang.codeepiphany.model.CodeDojo
 import com.wenjunhuang.codeepiphany.toolwindows.sidebar.submissionlog.SubmissionLogPresenter.SubmissionType
 import com.wenjunhuang.codeepiphany.toolwindows.sidebar.submissionlog.SubmissionLogPresenter.SubmissionType.*
 import com.wenjunhuang.codeepiphany.toolwindows.sidebar.submissionlog.SubmissionView.EMPTY_FORM
-import com.wenjunhuang.codeepiphany.toolwindows.sidebar.submissionlog.atcoder.AtCoderSubmissionResultForm
-import com.wenjunhuang.codeepiphany.toolwindows.sidebar.submissionlog.codeforces.CodeForcesSubmissionResultForm
-import com.wenjunhuang.codeepiphany.toolwindows.sidebar.submissionlog.hackerrank.HackerRankSubmissionResultForm
 import com.wenjunhuang.codeepiphany.toolwindows.sidebar.submissionlog.leetcode.LeetCodeSubmissionResultForm
-import com.wenjunhuang.codeepiphany.toolwindows.sidebar.submissionlog.luogu.LuoGuSubmissionResultForm
 
 import javax.swing.{JComponent, ScrollPaneConstants, SwingConstants}
 import scala.jdk.CollectionConverters.*
@@ -58,29 +54,6 @@ class SubmissionView(private val myProject: Project, submissionLogComponent: JCo
           submission,
           leetCodeSubmission
         ).getComponent
-      case HackerRankSubmission(language, languageVersion, challengeSlug, contestSlug, submission, hackerCases) =>
-        HackerRankSubmissionResultForm(
-          myProject,
-          language,
-          languageVersion,
-          challengeSlug,
-          contestSlug,
-          submission,
-          hackerCases.asJavaCollection
-        ).getComponent
-      case CodeForcesSubmission(language, languageVersion, submission, contestId, problemSetName) =>
-        CodeForcesSubmissionResultForm(
-          myProject,
-          language,
-          languageVersion,
-          submission,
-          contestId,
-          problemSetName
-        ).getComponent
-      case AtCoderSubmission(language, languageVersion, submission, contestId, problemId) =>
-        AtCoderSubmissionResultForm(myProject, language, languageVersion, submission, contestId, problemId).getComponent
-      case LuoGuSubmission(language, languageVersion, submission) =>
-        LuoGuSubmissionResultForm(myProject, language, languageVersion, submission).getComponent
     }
     mySplitter.setSecondComponent(
       JBScrollPane(

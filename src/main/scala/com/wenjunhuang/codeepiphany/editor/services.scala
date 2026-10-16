@@ -5,11 +5,7 @@ import cats.syntax.all.*
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.wenjunhuang.codeepiphany.PluginBundle
-import com.wenjunhuang.codeepiphany.atcoder.services.AtCoderSubmissionService
-import com.wenjunhuang.codeepiphany.codeforces.services.CodeForcesSubmissionService
-import com.wenjunhuang.codeepiphany.hackerrank.services.{ HackerRankEvaluationService, HackerRankSubmissionService }
 import com.wenjunhuang.codeepiphany.leetcode.services.{ LeetCodeEvaluationService, LeetCodeSubmissionService }
-import com.wenjunhuang.codeepiphany.luogu.services.LuoGuSubmissionService
 import com.wenjunhuang.codeepiphany.model.CodeDojo
 import com.wenjunhuang.codeepiphany.services.console
 import com.wenjunhuang.codeepiphany.services.console.showConsole
@@ -29,8 +25,6 @@ object services {
       }.flatMap {
         case Some(item) =>
           item.dojo match
-            case CodeDojo.HackerRank =>
-              HackerRankEvaluationService(project).evaluateCode(vf, item.testCases.asScala.toList.some)
             case CodeDojo.LeetCodeCN =>
               ChallengeSettings
                 .getInstance(project)
@@ -46,8 +40,6 @@ object services {
 
             case CodeDojo.LeetCode =>
               LeetCodeEvaluationService(project, CodeDojo.LeetCode).evaluateCode(vf, item.testCases.asScala.toList.some)
-            case CodeDojo.CodeForces | CodeDojo.AtCoder | CodeDojo.LuoGu =>
-              IO.unit
         case None => IO.unit
       }.handleErrorWith { e =>
         console.error(project, PluginBundle.message("test.code.error", e.getMessage))
@@ -66,12 +58,8 @@ object services {
         ) >>
           (
             item.dojo match
-              case CodeDojo.HackerRank => HackerRankSubmissionService(project).submitCode(vf)
               case CodeDojo.LeetCodeCN => LeetCodeSubmissionService(project, CodeDojo.LeetCodeCN).submitCode(vf)
               case CodeDojo.LeetCode   => LeetCodeSubmissionService(project, CodeDojo.LeetCode).submitCode(vf)
-              case CodeDojo.CodeForces => CodeForcesSubmissionService(project).submitCode(vf)
-              case CodeDojo.AtCoder    => AtCoderSubmissionService(project).submitCode(vf)
-              case CodeDojo.LuoGu      => LuoGuSubmissionService(project).submitCode(vf)
           )
       case None => IO.unit
     ).handleErrorWith { e =>

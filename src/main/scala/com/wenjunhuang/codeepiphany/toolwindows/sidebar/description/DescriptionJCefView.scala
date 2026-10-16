@@ -33,8 +33,7 @@ class DescriptionJCefView(
       "text/html",
       () =>
         Map(
-          DESCRIPTION_CONTENT -> myContent.map(_._1).getOrElse("No challenge selected 🌟"),
-          EXTRA_HEADER        -> myContent.map(_._3).map(CodoDojoHeaders.getHeader).getOrElse("")
+          DESCRIPTION_CONTENT -> myContent.map(_._1).getOrElse("No challenge selected 🌟")
         )
     )
   }
@@ -56,5 +55,4 @@ class DescriptionJCefView(
 
 object DescriptionJCefView {
   private val DESCRIPTION_CONTENT = "<!--descriptionContent-->"
-  private val EXTRA_HEADER        = "<!--extraHeader-->"
 }

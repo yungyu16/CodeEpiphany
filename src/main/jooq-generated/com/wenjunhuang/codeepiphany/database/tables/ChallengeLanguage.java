@@ -7,7 +7,6 @@ package com.wenjunhuang.codeepiphany.database.tables;
 import com.wenjunhuang.codeepiphany.database.DefaultSchema;
 import com.wenjunhuang.codeepiphany.database.Keys;
 import com.wenjunhuang.codeepiphany.database.tables.Challenge.ChallengePath;
-import com.wenjunhuang.codeepiphany.database.tables.HackerrankChallengeLanguage.HackerrankChallengeLanguagePath;
 import com.wenjunhuang.codeepiphany.database.tables.SolutionSubmission.SolutionSubmissionPath;
 import com.wenjunhuang.codeepiphany.database.tables.records.ChallengeLanguageRecord;
 
@@ -170,19 +169,6 @@ public class ChallengeLanguage extends TableImpl<ChallengeLanguageRecord> {
             _challenge = new ChallengePath(this, Keys.CHALLENGE_LANGUAGE__FK_CHALLENGE_LANGUAGE_PK_CHALLENGE, null);
 
         return _challenge;
-    }
-
-    private transient HackerrankChallengeLanguagePath _hackerrankChallengeLanguage;
-
-    /**
-     * Get the implicit to-many join path to the
-     * <code>hackerrank_challenge_language</code> table
-     */
-    public HackerrankChallengeLanguagePath hackerrankChallengeLanguage() {
-        if (_hackerrankChallengeLanguage == null)
-            _hackerrankChallengeLanguage = new HackerrankChallengeLanguagePath(this, null, Keys.HACKERRANK_CHALLENGE_LANGUAGE__FK_HACKERRANK_CHALLENGE_LANGUAGE_PK_CHALLENGE_LANGUAGE.getInverseKey());
-
-        return _hackerrankChallengeLanguage;
     }
 
     private transient SolutionSubmissionPath _solutionSubmission;

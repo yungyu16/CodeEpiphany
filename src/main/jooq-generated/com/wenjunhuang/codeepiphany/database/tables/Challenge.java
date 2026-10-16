@@ -7,10 +7,7 @@ package com.wenjunhuang.codeepiphany.database.tables;
 import com.wenjunhuang.codeepiphany.database.DefaultSchema;
 import com.wenjunhuang.codeepiphany.database.Indexes;
 import com.wenjunhuang.codeepiphany.database.Keys;
-import com.wenjunhuang.codeepiphany.database.tables.AtcoderChallenge.AtcoderChallengePath;
 import com.wenjunhuang.codeepiphany.database.tables.ChallengeLanguage.ChallengeLanguagePath;
-import com.wenjunhuang.codeepiphany.database.tables.CodeforcesChallenge.CodeforcesChallengePath;
-import com.wenjunhuang.codeepiphany.database.tables.HackerrankChallenge.HackerrankChallengePath;
 import com.wenjunhuang.codeepiphany.database.tables.LeetcodeChallenge.LeetcodeChallengePath;
 import com.wenjunhuang.codeepiphany.database.tables.Solution.SolutionPath;
 import com.wenjunhuang.codeepiphany.database.tables.records.ChallengeRecord;
@@ -185,19 +182,6 @@ public class Challenge extends TableImpl<ChallengeRecord> {
         return Keys.CHALLENGE__PK_CHALLENGE;
     }
 
-    private transient AtcoderChallengePath _atcoderChallenge;
-
-    /**
-     * Get the implicit to-many join path to the <code>atcoder_challenge</code>
-     * table
-     */
-    public AtcoderChallengePath atcoderChallenge() {
-        if (_atcoderChallenge == null)
-            _atcoderChallenge = new AtcoderChallengePath(this, null, Keys.ATCODER_CHALLENGE__FK_ATCODER_CHALLENGE_PK_CHALLENGE.getInverseKey());
-
-        return _atcoderChallenge;
-    }
-
     private transient ChallengeLanguagePath _challengeLanguage;
 
     /**
@@ -209,32 +193,6 @@ public class Challenge extends TableImpl<ChallengeRecord> {
             _challengeLanguage = new ChallengeLanguagePath(this, null, Keys.CHALLENGE_LANGUAGE__FK_CHALLENGE_LANGUAGE_PK_CHALLENGE.getInverseKey());
 
         return _challengeLanguage;
-    }
-
-    private transient CodeforcesChallengePath _codeforcesChallenge;
-
-    /**
-     * Get the implicit to-many join path to the
-     * <code>codeforces_challenge</code> table
-     */
-    public CodeforcesChallengePath codeforcesChallenge() {
-        if (_codeforcesChallenge == null)
-            _codeforcesChallenge = new CodeforcesChallengePath(this, null, Keys.CODEFORCES_CHALLENGE__FK_CODEFORCES_CHALLENGE_PK_CHALLENGE.getInverseKey());
-
-        return _codeforcesChallenge;
-    }
-
-    private transient HackerrankChallengePath _hackerrankChallenge;
-
-    /**
-     * Get the implicit to-many join path to the
-     * <code>hackerrank_challenge</code> table
-     */
-    public HackerrankChallengePath hackerrankChallenge() {
-        if (_hackerrankChallenge == null)
-            _hackerrankChallenge = new HackerrankChallengePath(this, null, Keys.HACKERRANK_CHALLENGE__FK_HACKERRANK_CHALLENGE_PK_CHALLENGE.getInverseKey());
-
-        return _hackerrankChallenge;
     }
 
     private transient LeetcodeChallengePath _leetcodeChallenge;

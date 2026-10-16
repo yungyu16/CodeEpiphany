@@ -22,7 +22,6 @@ import com.wenjunhuang.codeepiphany.actions.OpenSubmissionCodeAction.{
 }
 import com.wenjunhuang.codeepiphany.database.Tables.*
 import com.wenjunhuang.codeepiphany.database.tables.records.{
-  HackerrankSubmissionCaseRecord,
   LeetcodeSubmissionRecord,
   SolutionSubmissionRecord
 }
@@ -432,29 +431,6 @@ object SubmissionLogPresenter {
       record: SolutionSubmissionRecord,
       leetCodeSubmission: LeetcodeSubmissionRecord
     )
-    case HackerRankSubmission(
-      language: Language,
-      languageVersion: LanguageVersion,
-      challengeSlug: String,
-      contestSlug: Option[String],
-      record: SolutionSubmissionRecord,
-      hackerCases: List[HackerrankSubmissionCaseRecord]
-    )
-    case CodeForcesSubmission(
-      language: Language,
-      languageVersion: LanguageVersion,
-      record: SolutionSubmissionRecord,
-      contestId: Long,
-      problemsetName: Option[String]
-    )
-    case AtCoderSubmission(
-      language: Language,
-      languageVersion: LanguageVersion,
-      record: SolutionSubmissionRecord,
-      contestId: String,
-      problemId: String
-    )
-    case LuoGuSubmission(language: Language, languageVersion: LanguageVersion, record: SolutionSubmissionRecord)
   }
 
   private val EMPTY_QUERY_PARAMS = QueryParams(
@@ -469,7 +445,7 @@ object SubmissionLogPresenter {
     orderBy: Option[(SubmissionLogOrderBy, OrderDirection)]
   ) {
     def fillQueryConditions(base: SelectOnConditionStep[?]): SelectLimitStep[?] = {
-      var query = base
+      var query = base.and(CHALLENGE.DOJO.in(CodeDojo.values.map(_.value).toList.asJava))
       if dojos.nonEmpty then query = query.and(CHALLENGE.DOJO.in(dojos.map(_.value).asJava))
       if languages.nonEmpty then query = query.and(CHALLENGE_LANGUAGE.LANGUAGE.in(languages.map(_.value).asJava))
 

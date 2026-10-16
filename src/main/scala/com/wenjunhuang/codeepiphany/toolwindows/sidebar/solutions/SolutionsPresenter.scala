@@ -12,7 +12,6 @@ import com.wenjunhuang.codeepiphany.model.CodeDojo
 import com.wenjunhuang.codeepiphany.model.newtypes.ChallengeId
 import com.wenjunhuang.codeepiphany.settings.ChallengeSettings
 import com.wenjunhuang.codeepiphany.toolwindows.sidebar.solutions.leetcode.LeetCodeSolutionPresenter
-import com.wenjunhuang.codeepiphany.toolwindows.sidebar.solutions.luogu.LuoGuSolutionPresenter
 import com.wenjunhuang.codeepiphany.utils.syntax.*
 import com.wenjunhuang.codeepiphany.utils.walkaround.FileEditorManagerListenerBridge
 import fs2.Stream
@@ -122,43 +121,11 @@ class SolutionsPresenter(private val myProject: Project) extends Disposable {
         val presenter = LeetCodeSolutionPresenter(challengeId, myProject, CodeDojo.LeetCode)
         SolutionPresenterInfo(presenter, presenter.getView, dojo)
 
-      case CodeDojo.LuoGu =>
-        val presenter = LuoGuSolutionPresenter(challengeId, myProject)
-        SolutionPresenterInfo(presenter, presenter.getView, dojo)
-
-      // 为后续添加其他presenter预留位置
-      case CodeDojo.AtCoder =>
-        // TODO: 添加AtCoderSolutionPresenter
-        createEmptyPresenter(dojo)
-
-      case CodeDojo.CodeForces =>
-        // TODO: 添加CodeForcesSolutionPresenter
-        createEmptyPresenter(dojo)
-
-      case CodeDojo.HackerRank =>
-        // TODO: 添加HackerRankSolutionPresenter
-        createEmptyPresenter(dojo)
     }
 
     myView.addToCenter(presenterInfo.view)
     myCurrentPresenter = Some(presenterInfo)
   }.evalOnEDTDefault()
-
-  /** 创建空的presenter（占位符，用于未实现的dojo类型）
-    */
-  private def createEmptyPresenter(dojo: CodeDojo): SolutionPresenterInfo = {
-    import com.intellij.ui.components.JBLabel
-
-    import javax.swing.SwingConstants
-
-    val emptyView = new JBLabel(s"Solutions for ${dojo.show} are not yet implemented", SwingConstants.CENTER)
-
-    val emptyPresenter = new Disposable {
-      override def dispose(): Unit = () // 空实现
-    }
-
-    SolutionPresenterInfo(emptyPresenter, emptyView, dojo)
-  }
 
   def getView: JComponent = myView
 

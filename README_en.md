@@ -23,10 +23,6 @@ development environment.
 
 - **[LeetCode](https://www.leetcode.com)**
 - **[LeetCode Chinese](https://www.leetcode.cn)**
-- **[LuoGu](https://www.luogu.com.cn/)**
-- **[AtCoder](https://atcoder.jp)**
-- **[CodeForces](https://codeforces.com/)**
-- **[HackerRank](https://www.hackerrank.com)**
 
 ---
 

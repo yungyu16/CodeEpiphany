@@ -4,19 +4,8 @@
 package com.wenjunhuang.codeepiphany.database;
 
 
-import com.wenjunhuang.codeepiphany.database.tables.AtcoderChallenge;
-import com.wenjunhuang.codeepiphany.database.tables.AtcoderContests;
-import com.wenjunhuang.codeepiphany.database.tables.AtcoderContestsFts;
-import com.wenjunhuang.codeepiphany.database.tables.AtcoderProblems;
-import com.wenjunhuang.codeepiphany.database.tables.AtcoderProblemsFts;
 import com.wenjunhuang.codeepiphany.database.tables.Challenge;
 import com.wenjunhuang.codeepiphany.database.tables.ChallengeLanguage;
-import com.wenjunhuang.codeepiphany.database.tables.CodeforcesChallenge;
-import com.wenjunhuang.codeepiphany.database.tables.CodeforcesProblemsets;
-import com.wenjunhuang.codeepiphany.database.tables.CodeforcesProblemsetsFts;
-import com.wenjunhuang.codeepiphany.database.tables.HackerrankChallenge;
-import com.wenjunhuang.codeepiphany.database.tables.HackerrankChallengeLanguage;
-import com.wenjunhuang.codeepiphany.database.tables.HackerrankSubmissionCase;
 import com.wenjunhuang.codeepiphany.database.tables.LeetcodeChallenge;
 import com.wenjunhuang.codeepiphany.database.tables.LeetcodeSubmission;
 import com.wenjunhuang.codeepiphany.database.tables.Solution;
@@ -30,31 +19,6 @@ import com.wenjunhuang.codeepiphany.database.tables.SolutionSubmission;
 public class Tables {
 
     /**
-     * The table <code>atcoder_challenge</code>.
-     */
-    public static final AtcoderChallenge ATCODER_CHALLENGE = AtcoderChallenge.ATCODER_CHALLENGE;
-
-    /**
-     * The table <code>atcoder_contests</code>.
-     */
-    public static final AtcoderContests ATCODER_CONTESTS = AtcoderContests.ATCODER_CONTESTS;
-
-    /**
-     * The table <code>atcoder_contests_fts</code>.
-     */
-    public static final AtcoderContestsFts ATCODER_CONTESTS_FTS = AtcoderContestsFts.ATCODER_CONTESTS_FTS;
-
-    /**
-     * The table <code>atcoder_problems</code>.
-     */
-    public static final AtcoderProblems ATCODER_PROBLEMS = AtcoderProblems.ATCODER_PROBLEMS;
-
-    /**
-     * The table <code>atcoder_problems_fts</code>.
-     */
-    public static final AtcoderProblemsFts ATCODER_PROBLEMS_FTS = AtcoderProblemsFts.ATCODER_PROBLEMS_FTS;
-
-    /**
      * The table <code>challenge</code>.
      */
     public static final Challenge CHALLENGE = Challenge.CHALLENGE;
@@ -63,36 +27,6 @@ public class Tables {
      * The table <code>challenge_language</code>.
      */
     public static final ChallengeLanguage CHALLENGE_LANGUAGE = ChallengeLanguage.CHALLENGE_LANGUAGE;
-
-    /**
-     * The table <code>codeforces_challenge</code>.
-     */
-    public static final CodeforcesChallenge CODEFORCES_CHALLENGE = CodeforcesChallenge.CODEFORCES_CHALLENGE;
-
-    /**
-     * The table <code>codeforces_problemsets</code>.
-     */
-    public static final CodeforcesProblemsets CODEFORCES_PROBLEMSETS = CodeforcesProblemsets.CODEFORCES_PROBLEMSETS;
-
-    /**
-     * The table <code>codeforces_problemsets_fts</code>.
-     */
-    public static final CodeforcesProblemsetsFts CODEFORCES_PROBLEMSETS_FTS = CodeforcesProblemsetsFts.CODEFORCES_PROBLEMSETS_FTS;
-
-    /**
-     * The table <code>hackerrank_challenge</code>.
-     */
-    public static final HackerrankChallenge HACKERRANK_CHALLENGE = HackerrankChallenge.HACKERRANK_CHALLENGE;
-
-    /**
-     * The table <code>hackerrank_challenge_language</code>.
-     */
-    public static final HackerrankChallengeLanguage HACKERRANK_CHALLENGE_LANGUAGE = HackerrankChallengeLanguage.HACKERRANK_CHALLENGE_LANGUAGE;
-
-    /**
-     * The table <code>hackerrank_submission_case</code>.
-     */
-    public static final HackerrankSubmissionCase HACKERRANK_SUBMISSION_CASE = HackerrankSubmissionCase.HACKERRANK_SUBMISSION_CASE;
 
     /**
      * The table <code>leetcode_challenge</code>.

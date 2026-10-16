@@ -7,7 +7,6 @@ import com.intellij.openapi.Disposable
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.wenjunhuang.codeepiphany.database.Tables.*
-import com.wenjunhuang.codeepiphany.hackerrank.models.HackerRankContest
 import com.wenjunhuang.codeepiphany.model.CodeDojo.*
 import com.wenjunhuang.codeepiphany.model.newtypes.SubmissionId
 import com.wenjunhuang.codeepiphany.model.{CodeDojo, Language, LanguageVersion}
@@ -141,66 +140,6 @@ class SubmissionPresenter(private val myProject: Project) extends Disposable {
                             )
                         }
                       }
-                  case HackerRank =>
-                    val hackerCases = dsl
-                      .selectFrom(HACKERRANK_SUBMISSION_CASE)
-                      .where(HACKERRANK_SUBMISSION_CASE.SUBMISSIONID.eq(submissionId.value))
-                      .fetch()
-                      .asScala
-                      .toList
-                    val contest = dsl
-                      .select(HACKERRANK_CHALLENGE.CONTEST)
-                      .from(HACKERRANK_CHALLENGE)
-                      .where(HACKERRANK_CHALLENGE.ID.eq(record.get(CHALLENGE.ID)))
-                      .fetchOne()
-                      .component1()
-                    val contestSlug = HackerRankContest.fromCIString(CIString(contest)).flatMap {
-                      case HackerRankContest.Master           => None
-                      case p @ HackerRankContest.ProjectEuler => Some(p.slug)
-                    }
-
-                    Some(
-                      SubmissionType.HackerRankSubmission(
-                        lang,
-                        languageVersion,
-                        record.get(CHALLENGE.SLUG),
-                        contestSlug,
-                        submissionRecord,
-                        hackerCases
-                      )
-                    )
-                  case CodeForces =>
-                    dsl
-                      .selectFrom(CODEFORCES_CHALLENGE)
-                      .where(CODEFORCES_CHALLENGE.ID.eq(record.get(CHALLENGE.ID)))
-                      .fetchOptional()
-                      .toScala
-                      .map { codeForcesChallenge =>
-                        SubmissionType.CodeForcesSubmission(
-                          lang,
-                          languageVersion,
-                          submissionRecord,
-                          codeForcesChallenge.getContestid,
-                          Option(codeForcesChallenge.getProblemsetname)
-                        )
-                      }
-                  case AtCoder =>
-                    dsl
-                      .selectFrom(ATCODER_CHALLENGE)
-                      .where(ATCODER_CHALLENGE.ID.eq(record.get(CHALLENGE.ID)))
-                      .fetchOptional()
-                      .toScala
-                      .map { atCoderChallenge =>
-                        SubmissionType.AtCoderSubmission(
-                          lang,
-                          languageVersion,
-                          submissionRecord,
-                          atCoderChallenge.getContestid,
-                          record.get(CHALLENGE.DOJOID)
-                        )
-                      }
-                  case LuoGu =>
-                    SubmissionType.LuoGuSubmission(lang, languageVersion, submissionRecord).some
                 }
               }.flatten
             }

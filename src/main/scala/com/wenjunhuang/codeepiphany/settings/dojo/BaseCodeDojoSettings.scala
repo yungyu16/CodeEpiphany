@@ -7,11 +7,7 @@ import scala.jdk.CollectionConverters.*
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.project.Project
 import com.intellij.util.xmlb.annotations.Attribute
-import com.wenjunhuang.codeepiphany.atcoder.settings.AtCoderSettings
-import com.wenjunhuang.codeepiphany.codeforces.settings.CodeForcesSettings
-import com.wenjunhuang.codeepiphany.hackerrank.settings.HackerRankSettings
 import com.wenjunhuang.codeepiphany.leetcode.settings.{ LeetCodeCNSettings, LeetCodeSettings }
-import com.wenjunhuang.codeepiphany.luogu.settings.LuoGuSettings
 import com.wenjunhuang.codeepiphany.model.{ CodeDojo, Language, LanguageVersion }
 import com.wenjunhuang.codeepiphany.settings.dojo.BaseCodeDojoSettings.*
 import com.wenjunhuang.codeepiphany.utils.ConfigConverters.*
@@ -79,10 +75,6 @@ object BaseCodeDojoSettings {
     codeDojo match {
       case CodeDojo.LeetCode   => LeetCodeSettings.getInstance(project)
       case CodeDojo.LeetCodeCN => LeetCodeCNSettings.getInstance(project)
-      case CodeDojo.CodeForces => CodeForcesSettings.getInstance(project)
-      case CodeDojo.AtCoder    => AtCoderSettings.getInstance(project)
-      case CodeDojo.LuoGu      => LuoGuSettings.getInstance(project)
-      case CodeDojo.HackerRank => HackerRankSettings.getInstance(project)
     }
   }
 }

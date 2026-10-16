@@ -2,13 +2,11 @@
  * Copyright (c) 2024 TypeFox and others.
  * Licensed under the MIT License. See LICENSE in the package root for license information.
  * ------------------------------------------------------------------------------------------ */
-/// <reference types="vitest" />
 import {defineConfig} from 'vite';
 import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin';
 import {dirname, resolve} from 'node:path'
 import {fileURLToPath} from "node:url";
 import {intellijStylePrePlugin,intellijStylePostPlugin} from './plugin/intellijStylePlugin';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -21,7 +19,6 @@ export const definedViteConfig = defineConfig({
             input: {
                 challengeDescription: resolve(__dirname, 'challengeDescription/index.html'),
                 leetCodeSolutionArticle: resolve(__dirname, 'leetCodeSolutionArticle/index.html'),
-                luoguYiDun: resolve(__dirname, 'luoguYiDun/index.html'),
             }
         },
         assetsDir: 'assets',
@@ -52,15 +49,7 @@ export const definedViteConfig = defineConfig({
     },
     plugins: [
         intellijStylePrePlugin(),
-        intellijStylePostPlugin(),
-        viteStaticCopy({
-            targets: [
-                {
-                    src: 'challengeDescription/atcoder/*',
-                    dest: 'challengeDescription/atcoder'
-                }
-            ]
-        })
+        intellijStylePostPlugin()
     ],
     define: {
         rootDirectory: JSON.stringify(__dirname),
